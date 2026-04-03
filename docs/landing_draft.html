@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pepe Pagos es una plataforma B2B de infraestructura de pagos y movimiento de dinero para fintechs, bancos, comercios y marketplaces. API unificada developer-first.">
+    <meta name="keywords" content="pagos B2B, API de pagos, fintech, conciliación, smart routing, webhooks, transferencias internacionales">
+    <meta name="author" content="MVP Factory Studio">
+    <meta name="theme-color" content="#1E293B">
+    <link rel="canonical" href="https://mvpfactory.studio/p/pepe-pagos">
+    
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mvpfactory.studio/p/pepe-pagos">
+    <meta property="og:title" content="Pepe Pagos | Infraestructura B2B y API unificada para pagos">
+    <meta property="og:description" content="Unifica en una sola API cobros, payouts, transferencias locales e internacionales, conciliación y compliance.">
+    <meta property="og:image" content="https://mvpfactory.studio/assets/pepe-pagos-og.png">
+
+    <title>Pepe Pagos | API de Infraestructura de Pagos B2B</title>
+
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary: #D97706; /* Amber-600 */
+            --primary-hover: #b45309;
+            --secondary: #1E293B; /* Slate-800 */
+            --secondary-dark: #0f172a;
+            --accent: #F59E0B; /* Amber-500 */
+            --bg-light: #F8FAFC;
+            --text-dark: #334155;
+            --text-light: #F1F5F9;
+            --border-color: #e2e8f0;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            --font-code: 'Courier New', Courier, monospace;
+        }
+
+        /* Resets Básicos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utilidades de Botones */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(217, 119, 6, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(217, 119, 6, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-light);
+            color: var(--secondary);
+        }
+
+        /* Navegación */
+        header {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: none; /* Oculto en móvil por defecto, se podría usar un toggle JS */
+            gap: 2rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            display: none;
+        }
+
+        /* Sección Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--secondary) 100%);
+            color: var(--text-light);
+            padding: 8rem 5% 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .hero-code {
+            width: 100%;
+            max-width: 600px;
+            background-color: #020617;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .code-header {
+            background-color: #1e293b;
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #ef4444; }
+        .dot-yellow { background-color: #f59e0b; }
+        .dot-green { background-color: #10b981; }
+
+        .code-body {
+            padding: 1.5rem;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            text-align: left;
+        }
+
+        .code-keyword { color: #c678dd; }
+        .code-function { color: #61afef; }
+        .code-string { color: #98c379; }
+        .code-comment { color: #64748b; }
+
+        /* Sección Características */
+        .features {
+            padding: 5rem 5%;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-light);
+            padding: 2.5rem 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            background-color: rgba(217, 119, 6, 0.1);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-text {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Sección Casos de Uso / Integración */
+        .integrations {
+            padding: 5rem 5%;
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-tag {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.25rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: var(--secondary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Sección Precios / CTA */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(to right, var(--secondary-dark), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #020617;
+            color: #94a3b8;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-links, .nav-cta {
+                display: flex;
+            }
+
+            .hero {
+                flex-direction: row;
+                text-align: left;
+                padding-top: 10rem;
+                justify-content: space-between;
+            }
+
+            .hero-content {
+                text-align: left;
+                flex: 1;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+
+            .hero-code {
+                flex: 1;
+                margin-top: 0;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabecera / Navegación -->
+    <header>
+        <div class="logo">
+            <!-- Icono SVG Placeholder -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+            </svg>
+            Pepe Pagos
+        </div>
+        <nav class="nav-links">
+            <a href="#features">Características</a>
+            <a href="#integrations">Integraciones</a>
+            <a href="#pricing">Precios</a>
+            <a href="#">Documentación</a>
+        </nav>
+        <div class="nav-cta">
+            <a href="#cta" class="btn btn-primary" style="padding: 0.5rem 1rem;">Obtener API Key</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Hero -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Infraestructura B2B y API unificada para <span>pagos y movimiento de dinero</span></h1>
+                <p class="hero-subtitle">Orquesta múltiples rieles de pago tradicionales y digitales. Unifica cobros, payouts, conciliación y compliance en una única plataforma con enfoque developer-first.</p>
+                <div class="hero-buttons">
+                    <a href="#cta" class="btn btn-primary">Empezar a Construir</a>
+                    <a href="#" class="btn btn-outline">Leer la Documentación</a>
+                </div>
+            </div>
+            
+            <div class="hero-code">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div class="code-body">
+<pre><code><span class="code-comment">// Inicializar Pepe Pagos SDK</span>
+<span class="code-keyword">const</span> pepe = <span class="code-keyword">new</span> <span class="code-function">PepePagos</span>(<span class="code-string">'sk_live_12345...'</span>);
+
+<span class="code-comment">// Orquestar un Payout Internacional</span>
+<span class="code-keyword">const</span> payout = <span class="code-keyword">await</span> pepe.payouts.<span class="code-function">create</span>({
+  <span class="code-string">amount</span>: <span class="code-string">50000</span>,
+  <span class="code-string">currency</span>: <span class="code-string">'MXN'</span>,
+  <span class="code-string">destination</span>: <span class="code-string">'acct_bank_0987'</span>,
+  <span class="code-string">routing_strategy</span>: <span class="code-string">'smart_cost'</span>,
+  <span class="code-string">compliance</span>: {
+    <span class="code-string">kyb_check</span>: <span class="code-keyword">true</span>
+  }
+});
+
+<span class="code-function">console</span>.<span class="code-function">log</span>(payout.status); <span class="code-comment">// 'processing'</span></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Características -->
+        <section id="features" class="features">
+            <div class="section-header">
+                <h2 class="section-title">Construye servicios financieros sin empezar desde cero</h2>
+                <p class="section-subtitle">Nuestra arquitectura te permite escalar tu fintech, marketplace o banco digital con trazabilidad y automatización total.</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Tarjeta 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h3 class="feature-title">Cobros y Payouts</h3>
+                    <p class="feature-text">Gestiona la entrada y salida de fondos globalmente. Soporte para transferencias locales e internacionales con liquidación rápida.</p>
+                </div>
+
+                <!-- Tarjeta 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    </div>
+                    <h3 class="feature-title">Smart Routing</h3>
+                    <p class="feature-text">Enruta transacciones inteligentemente a través de múltiples rieles de pago para optimizar costos, velocidad y tasas de aprobación.</p>
+                </div>
+
+                <!-- Tarjeta 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Compliance y Antifraude</h3>
+                    <p class="feature-text">Reglas de prevención de fraude en tiempo real y controles automatizados de compliance integrados directamente en el flujo transaccional.</p>
+                </div>
+
+                <!-- Tarjeta 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    </div>
+                    <h3 class="feature-title">Conciliación Automatizada</h3>
+                    <p class="feature-text">Automatiza el cuadre de cuentas y la gestión de ledgers. Reduce la carga operativa de tus equipos financieros y contables.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Ecosistema / Integraciones -->
+        <section id="integrations" class="integrations">
+            <div class="section-header" style="margin-bottom: 0;">
+                <h2 class="section-title">Ecosistema Moderno y Developer-First</h2>
+                <p class="section-subtitle">Pepe Pagos está construido pensando en la mejor experiencia para el desarrollador, soportando estándares de la industria y herramientas modernas.</p>
+            </div>
+            <div class="tags-container">
+                <span class="tech-tag">REST API Completa</span>
+                <span class="tech-tag">Webhooks Seguros</span>
+                <span class="tech-tag">Stripe Billing Nativo</span>
+                <span class="tech-tag">MCP Server Compatible</span>
+                <span class="tech-tag">SDKs (Node, Python, Go)</span>
+            </div>
+        </section>
+
+        <!-- Sección Precios / CTA -->
+        <section id="cta" class="cta-section">
+            <div class="cta-box">
+                <h2 class="cta-title">Escala sin límites. Paga por lo que usas.</h2>
+                <p class="cta-text">Tanto si eres una startup lanzando tu MVP como una corporación procesando millones en volumen, nuestra infraestructura se adapta a ti con precios transparentes y Stripe Billing integrado.</p>
+                <div class="hero-buttons" style="flex-direction: row; justify-content: center; margin-top: 2rem;">
+                    <button class="btn btn-primary" style="background-color: white; color: var(--secondary); font-size: 1.1rem; padding: 1rem 2.5rem;">Crear Cuenta Gratis</button>
+                    <button class="btn btn-outline" style="border-color: white; color: white;">Contactar a Ventas</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Pepe Pagos</h3>
+                <p>Infraestructura B2B y API unificada para pagos y movimiento de dinero, diseñada por desarrolladores para desarrolladores.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Producto</h4>
+                <ul>
+                    <li><a href="#">Documentación API</a></li>
+                    <li><a href="#">Webhooks</a></li>
+                    <li><a href="#">Casos de Uso</a></li>
+                    <li><a href="#">Precios</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Compañía</h4>
+                <ul>
+                    <li><a href="#">Acerca de Nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Soporte</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Pepe Pagos. Creado por MVP Factory Studio.</p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos de Servicio</a>
+                <a href="#">Seguridad</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
