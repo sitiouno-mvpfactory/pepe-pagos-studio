@@ -1,0 +1,12 @@
+{
+  "product_name": "Pepe Pagos",
+  "product_slug": "pepe-pagos",
+  "domain": "mvpfactory.studio/p/pepe-pagos",
+  "stripe": {
+    "product_id": "PENDIENTE_DE_CONFIGURACION",
+    "price_id": "PENDIENTE_DE_CONFIGURACION",
+    "webhook_url": "https://mvpfactory.studio/api/stripe/webhook",
+    "webhook_secret": "PENDIENTE_DE_CONFIGURACION"
+  },
+  "instructions": "Para completar la configuración de Stripe, cree el producto y el precio en el panel de Stripe y actualice estos campos."
+}
