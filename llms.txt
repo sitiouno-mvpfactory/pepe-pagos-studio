@@ -1,0 +1,24 @@
+# Pepe Pagos
+
+**URL:** https://mvpfactory.studio/p/pepe-pagos
+**Desarrollador:** MVP Factory Studio
+**Dominio:** mvpfactory.studio/p/pepe-pagos
+
+## Descripción General
+Pepe Pagos es una plataforma B2B de infraestructura de pagos y movimiento de dinero diseñada para fintechs, bancos, comercios y marketplaces. A través de una única API, permite la orquestación de múltiples rieles de pago tradicionales y digitales. Su enfoque principal es "developer-first", priorizando la escalabilidad, trazabilidad y automatización operativa.
+
+## Casos de Uso y Público Objetivo
+Permite a terceros integrar servicios financieros robustos sin necesidad de construir la infraestructura desde cero. Ideal para startups lanzando su MVP o corporaciones procesando millones en volumen que requieren procesar transacciones con total compliance y prevención de fraude.
+
+## Características Principales
+* **Cobros y Payouts:** Gestión de entrada y salida de fondos globalmente, con soporte para transferencias locales e internacionales con liquidación rápida.
+* **Smart Routing:** Enrutamiento inteligente a través de múltiples rieles de pago para optimizar costos, velocidad y tasas de aprobación.
+* **Compliance y Antifraude:** Reglas de prevención de fraude en tiempo real y controles automatizados de compliance integrados directamente en el flujo transaccional.
+* **Conciliación Automatizada:** Cuadre de cuentas automático y gestión de ledgers, reduciendo la carga operativa de los equipos financieros.
+
+## Tecnologías y Ecosistema
+* Arquitectura REST API completa
+* Servidor compatible con MCP (Model Context Protocol)
+* Facturación nativa con Stripe Billing
+* Webhooks seguros para notificaciones en tiempo real
+* Repositorio GitHub asociado: pepe-pagos-studio (por sitiouno)
