@@ -1,0 +1,13 @@
+/* Auto-generated theme overrides from deploy config. */
+:root {
+  --accent-purple: #d97706;
+  --accent-cyan: #f59e0b;
+  --accent-gradient: linear-gradient(135deg, #d97706, #f59e0b);
+  --bg-secondary: #1e293b;
+  --ws-surface: #1e293b;
+  --ws-sidebar-active: rgba(217, 119, 6, 0.24);
+  --border-accent: rgba(217, 119, 6, 0.38);
+  --blue-light: rgba(217, 119, 6, 0.10);
+  --blue: var(--accent-purple);
+  --blue-deep: var(--accent-purple);
+}
