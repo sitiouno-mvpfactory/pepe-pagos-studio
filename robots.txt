@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mvpfactory.studio/p/pepe-pagos/sitemap.xml
